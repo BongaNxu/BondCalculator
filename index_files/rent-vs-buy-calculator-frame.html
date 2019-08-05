@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<script async="" type="text/javascript" src="./gpt.js"></script>
+<script id="tinyhippos-injected">
+    if (window.top.ripple) {
+        window.top.ripple("bootstrap").inject(window, document);
+    }
+
+</script>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rent vs Buy Calculator</title>
+
+    <meta content="noindex,nofollow" name="robots">
+    <script src="./iqx2twd.js"></script>
+    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
+    <link href="./calc-styles.css" rel="stylesheet">
+    <style>
+       
+        .disable {
+            display: none !important;
+        }
+       
+    </style>
+    <!--
+<script type="text/javascript" src="./rta.js" async=""></script>
+<link rel="preload" href="./f(8).txt" as="script">
+<script type="text/javascript" src="./f(8).txt"></script>
+<link rel="preload" href="./f(9).txt" as="script">
+<script type="text/javascript" src="./f(9).txt"></script>
+<script src="./pubads_impl_2019043001.js" async=""></script>
+-->
+
+</head>
+
+<body style="background:none;">
+    <!-- main content -->
+    <div class="content contentResponsive">
+        <section>
+            <div class="main">
+                <div class="line">
+                    <div class="col customcol">
+                        <fieldset class="slider_tooltip mtl" data-tooltip="Rent slider_tooltip">
+                            <div class="line">
+                                <div class="col cols17">
+                                    <p class="h4">What is your target monthly rent?</p>
+                                </div>
+                                <div class="col cols7 lastCol">
+                                    <div class="h4 txtR typeEmphasize" id="monthly_rent_text">$2,600</div>
+                                </div>
+                            </div>
+                            <div class="slider" data-max="50000" data-min="100" data-step="100" data-value="2600" id="monthly_rent_slider" style="">
+                                <span class="sliderLine"></span> <span class="sliderHandle" style="left: 20.9596px;"></span> <input id="monthly_rent" name="monthly_rent" type="hidden" value="2600">
+                            </div>
+                        </fieldset>
+                        <fieldset class="slider_tooltip mtl" data-tooltip="Home slider_tooltip">
+                            <div class="line">
+                                <div class="col cols17">
+                                    <p class="h4">What is your target home price?</p>
+                                </div>
+                                <div class="col cols7 lastCol">
+                                    <p class="h4 txtR typeEmphasize" id="sale_price_text">$500,000</p>
+                                </div>
+                            </div>
+                            <div class="slider" data-max="6000000" data-min="10000" data-step="10000" data-value="500000" id="sale_price_slider" style="">
+                                <span class="sliderLine"></span> <span class="sliderHandle" style="left: 20.4372px;"></span> <input id="sale_price" name="sale_price" type="hidden" value="500000">
+                            </div>
+                        </fieldset>
+                        <fieldset class="slider_tooltip mtl" data-tooltip="Rent slider_tooltip">
+                            <div class="line">
+                                <div class="col cols17">
+                                    <p class="h4">How long would you live there?</p>
+                                </div>
+                                <div class="col cols7 lastCol">
+                                    <p class="h4 txtR typeEmphasize" id="years_owned_text">7 years</p>
+                                </div>
+                            </div>
+                            <div class="slider" data-max="30" data-min="1" data-step="1" data-value="7" id="years_owned_slider" style="">
+                                <span class="sliderLine"></span> <span class="sliderHandle" style="left: 17.1724px;"></span> <input id="years_owned" name="years_owned" type="hidden" value="7">
+                            </div>
+                        </fieldset>
+                        <fieldset class="slider_tooltip mtl disable" data-tooltip="Tax slider_tooltip">
+                            <div class="line">
+                                <div class="col cols17">
+                                    <p class="h4">What is your income tax rate?</p>
+                                </div>
+                                <div class="col cols7 lastCol">
+                                    <p class="h4 txtR typeEmphasize" id="tax_bracket_text">0%</p>
+                                </div>
+                            </div>
+                            <div class="slider" data-max=".5" data-min="0" data-step=".01" data-value="0.00" id="tax_bracket_slider" style="">
+                                <span class="sliderLine"></span> <span class="sliderHandle" style="left: 0px;"></span> <input id="tax_bracket" name="tax_bracket" type="hidden" value="0.00">
+                            </div>
+                            <div class="line typeDeemphasize">
+                                <div class="col pln colExt txtR">
+                                    <!--                                    <span class="clickable" id="chartShower">Not Sure? See a Tax Rate Chart<i class="iconDownOpen" id="down_table"></i><i class="iconUpOpen hideFully" id="up_table"></i></span>-->
+                                </div>
+                                <div class="col">
+                                    <span class="fieldItem checkbox"><input id="no_itemize" name="checkbox1" type="checkbox" checked> <label for="no_itemize">I do not itemize.</label></span>
+                                </div>
+                            </div>
+                            <table class="table tableBasic tableHover txtC h7 hideFully" id="taxTable">
+                                <thead>
+                                    <tr>
+                                        <th role="columnheader">
+                                            <!--                                            Federal<br>-->
+                                            Tax Rate
+                                        </th>
+                                        <td>Single</td>
+                                        <td>
+                                            Married<br>
+                                            Filling Separately
+                                        </td>
+                                        <td>
+                                            Married, or<br>
+                                            Qualifying Widow(er)
+                                        </td>
+                                        <td>Head of Household</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">10%</span></th>
+                                        <td>
+                                            Less than<br>
+                                            $8,925
+                                        </td>
+                                        <td>
+                                            Less than<br>
+                                            $8,925
+                                        </td>
+                                        <td>
+                                            Less than<br>
+                                            $17,850
+                                        </td>
+                                        <td>
+                                            Less than<br>
+                                            $12,750
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">15%</span></th>
+                                        <td>
+                                            $8,926<br>
+                                            <span>to</span><br>
+                                            $36,250
+                                        </td>
+                                        <td>
+                                            $8,926<br>
+                                            <span>to</span><br>
+                                            $36,250
+                                        </td>
+                                        <td>
+                                            $17,851<br>
+                                            <span>to</span><br>
+                                            $72,500
+                                        </td>
+                                        <td>
+                                            $12,751<br>
+                                            <span>to</span><br>
+                                            $48,600
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">25%</span></th>
+                                        <td>
+                                            $36,251<br>
+                                            <span>to</span><br>
+                                            $87,850
+                                        </td>
+                                        <td>
+                                            $36,251<br>
+                                            <span>to</span><br>
+                                            $73,200
+                                        </td>
+                                        <td>
+                                            $72,501<br>
+                                            <span>to</span><br>
+                                            $146,400
+                                        </td>
+                                        <td>
+                                            $48,601<br>
+                                            <span>to</span><br>
+                                            $125,450
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">0%</span></th>
+                                        <td>
+                                            $87,851<br>
+                                            <span>to</span><br>
+                                            $183,250
+                                        </td>
+                                        <td>
+                                            $73,201<br>
+                                            <span>to</span><br>
+                                            $111,525
+                                        </td>
+                                        <td>
+                                            $146,401<br>
+                                            <span>to</span><br>
+                                            $223,050
+                                        </td>
+                                        <td>
+                                            $125,451<br>
+                                            <span>to</span><br>
+                                            $203,150
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">33%</span></th>
+                                        <td>
+                                            $183,251<br>
+                                            <span>to</span><br>
+                                            $398,350
+                                        </td>
+                                        <td>
+                                            $111,526<br>
+                                            <span>to</span><br>
+                                            $199,175
+                                        </td>
+                                        <td>
+                                            $223,051<br>
+                                            <span>to</span><br>
+                                            $398,350
+                                        </td>
+                                        <td>
+                                            $203,151<br>
+                                            <span>to</span><br>
+                                            $398,350
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">35%</span></th>
+                                        <td>
+                                            $398,351<br>
+                                            <span>to</span><br>
+                                            $400,000
+                                        </td>
+                                        <td>
+                                            $199,176<br>
+                                            <span>to</span><br>
+                                            $225,000
+                                        </td>
+                                        <td>
+                                            $398,351<br>
+                                            <span>to</span><br>
+                                            $450,000
+                                        </td>
+                                        <td>
+                                            $398,351<br>
+                                            <span>to</span><br>
+                                            $425,000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th role="columnheader"><span class="typeEmphasize">39.6%</span></th>
+                                        <td>
+                                            More Than<br>
+                                            $400,000
+                                        </td>
+                                        <td>
+                                            More Than<br>
+                                            $225,000
+                                        </td>
+                                        <td>
+                                            More Than<br>
+                                            $450,000
+                                        </td>
+                                        <td>
+                                            More Than<br>
+                                            $425,000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="txtL" colspan="8">
+                                            <!--                                        If you itemize your tax deductions, you can probably deduct your mortgage interest and property tax payments. If you don't itemize, check the "I do not itemize" box. If you pay state income tax, add your marginal federal and state rates together.</td>-->
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">
+                                            <!--                                            Source: <a href="http://www.irs.gov/publications/p505/ch02.html" target="irsPage">http://www.irs.gov/publications/p505/ch02.html</a>-->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                        <fieldset class="mtl slider_tooltip" data-tooltip="Mortgage Rate slider_tooltip">
+                            <div class="line">
+                                <div class="col cols17">
+                                    <p class="h4">What is your mortgage rate?</p>
+                                </div>
+                                <div class="col cols7 lastCol">
+                                    <p class="h4 txtR typeEmphasize" id="mortgage_rate_text">4.80%</p>
+                                </div>
+                            </div>
+                            <div class="slider" data-max=".25" data-min=".005" data-step="0.0005" data-value=".10" id="mortgage_rate_slider" style="">
+                                <span class="sliderLine"></span> <span class="sliderHandle" style="left: 14.5673px;"></span> <input id="mortgage_rate" name="mortgage_rate" type="hidden" value=".10">
+                            </div>
+                            <div class="line">
+                                <div class="col typeDeemphasize txtR" id="mortgageHelp"></div>
+                            </div>
+                        </fieldset>
+                        <div class="line" style="display:none">
+                            <div class="col cols24">
+                                <p class="txtC clickable" id="show_advanced"><span id="word_show"><i class="iconDownOpen"></i>Show</span><span class="hideFully" id="word_hide"><i class="iconUpOpen"></i>Hide</span> Advanced Settings</p>
+                            </div>
+                        </div>
+                        <div class="hideFully" id="advanced_settings">
+                            <div class="box boxHighlight backgroundBasic mtn">
+                                <div class="boxHead boxHeadBasic">
+                                    <h2>Advanced Settings</h2>
+                                </div>
+                                <div class="boxBody form">
+                                    <div class="line">
+                                        <div class="col cols24 colsLast">
+                                            <h5 class="mtm mbm">One Time Costs</h5>
+                                            <fieldset class="mbm">
+                                                <label for="buying_closing_costs">Buying Closing Costs</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="buying_closing_costs" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Include loan origination fees, mortgage points, title insurance, appraisal, escrow deposit, fees for running a credit report, and other closing costs."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="capital_gains">Long Term Capital Gains Tax</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="capital_gains" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Assessed if the sale price exceeds the original purchase price by $500,000 if filing as married, or $250,000 if filing as an individual. We have assumed a 15% tax rate. Your tax situation might be different."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="selling_closing_costs">Selling Closing Costs</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="selling_closing_costs" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Include the real estate agents&#39; commissions, transfer taxes, title insurance fees, and other closing costs when selling a home."></i></span>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="col cols24 colsLast">
+                                            <h5 class="mtl mbm">Ongoing Costs</h5>
+                                            <fieldset class="mbm">
+                                                <label for="annual_property_tax">Annual Property Tax</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="annual_property_tax" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="This varies by locality. We use the actual average property tax rate for your metro area. You can also input your personal property tax rate as a percent of your home&#39;s value or a national baseline assumption of 1.35%."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="rental_insurance">Rent Insurance</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="rental_insurance" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="A policy that covers your personal possessions against perils such as fire, theft, or vandalism. We assume this is 1.32% of your monthly rent. This is not a required cost."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="homeowners_insurance">Homeowner's Insurance</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="homeowners_insurance" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Typically required by mortgage lenders. We assume an annual cost of 0.46% of the home&#39;s value. Homeowners insurance could be significantly higher if you pay high premiums for risk factors such as floods or earthquakes."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="utilities">Utilities</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4" id="utilities" type="text"><span class="addOn addOnBasic">a month</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Water, electric, and sewage are often higher for homeowners than for renters. We assume you would pay $100 per month more in utilities as a homeowner than as a renter."></i></span>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="col cols24 colsLast">
+                                            <h5 class="mtl mbm">Mortgage Assumptions</h5>
+                                            <fieldset class="mbm">
+                                                <label for="down_payment">Down Payment</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="down_payment" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="The share of the purchase price you pay upfront. Our baseline assumption is 20%. Putting less than 20% down typically requires mortgage insurance, which is not included in this calculator."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="mortgage_term">Mortgage Term</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4" id="mortgage_term" type="text"><span class="addOn addOnBasic">years</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="The number of years until the mortgage is paid off. Our baseline assumption is 30 years. Some mortgages have shorter terms such as 15 years."></i></span>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="col cols24 colsLast">
+                                            <h5 class="mtl mbm">Economic Assumptions</h5>
+                                            <fieldset class="mbm">
+                                                <label for="rental_appreciation">Rent Appreciation</label> <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="rental_appreciation" type="text" value="2"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="The amount that your rent is likely to increase each year."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="renovations">Renovations</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="renovations" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Both regular maintenance and home improvement. We assume homeowners pay 1% annually of the home&#39;s value, although this can run significantly higher."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="discount_rate">Discount Rate</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="discount_rate" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="The opportunity cost of your money. It reflects what your money would earn as savings or investments other than housing. The higher the discount rate, the more expensive homeownership is because buying a home involves a big upfront payment."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="sale_appreciation">Price Appreciation</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="sale_appreciation" type="text" value="2"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="The amount that your home is likely to appreciate in value each year, but – be warned -- appreciation is volatile and unpredictable. We make a conservative assumption for each metro area, based on long-term and recent local trends, typically 2-3% per year. This is nominal, not real, appreciation."></i></span>
+                                            </fieldset>
+                                            <fieldset class="mbm">
+                                                <label for="inflation">Inflation</label><br>
+                                                <span class="fieldItem fieldAppend text"><input class="advanced_setting cols4 percentage" id="inflation" type="text"><span class="addOn addOnBasic">%</span> <i class="iconInfo typeLowlight adv_tooltip" data-tooltip="Impacts costs such as utilities and renovations, which we assume increase at the rate of inflation."></i></span>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col colExt" id="chartCol">
+                        <div class="box boxBasic mtn" id="chart_wrapper">
+                            <div class="boxBody">
+                                <h2 id="short_answer"><strong>Buying</strong> is 7% cheaper.</h2>
+                                <div class="typeReversed1 mtl" id="chart">
+                                    <div class="txtM backgroundOMG" id="rent_bar" style="height: 370px; margin-top: 0px;">
+                                        <p class="label h4 mlm mtl">
+                                            Renting Costs<br>
+                                            <span class="label value typeEmphasize">R2,600 <span class=""> / month</span></span>
+                                        </p>
+                                    </div>
+                                    <div class="txtM backgroundHighlight" id="buy_bar" style="height: 342.504px; margin-top: 27.496px;">
+                                        <p class="label h4 mlm mtl">
+                                            Buying Costs<br>
+                                            <span class="label value typeEmphasize">$2,274 <span class=""> / month</span></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mtm txtC mbm" id="srp_buttons"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="bottom_limit"></div>
+            </div>
+            <script src="./jquery.min.js"></script>
+            <script src="./class.js"></script>
+            <script src="./functions.js"></script>
+            <script src="./iframeResizer.contentWindow.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $(window).resize(function() {
+                        $('.slider').slider();
+                    });
+                });
+
+            </script>
+            <script>
+                window.iFrameResizer = {
+                    readyCallback: function() {
+                        $('.slider').slider();
+                    }
+                }
+
+            </script>
+        </section>
+    </div>
+
+    <span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Include loan origination fees, mortgage points, title insurance, appraisal, escrow deposit, fees for running a credit report, and other closing costs.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Assessed if the sale price exceeds the original purchase price by $500,000 if filing as married, or $250,000 if filing as an individual. We have assumed a 15% tax rate. Your tax situation might be different.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Include the real estate agents' commissions, transfer taxes, title insurance fees, and other closing costs when selling a home.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">This varies by locality. We use the actual average property tax rate for your metro area. You can also input your personal property tax rate as a percent of your home's value or a national baseline assumption of 1.35%.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">A policy that covers your personal possessions against perils such as fire, theft, or vandalism. We assume this is 1.32% of your monthly rent. This is not a required cost.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Typically required by mortgage lenders. We assume an annual cost of 0.46% of the home's value. Homeowners insurance could be significantly higher if you pay high premiums for risk factors such as floods or earthquakes.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Water, electric, and sewage are often higher for homeowners than for renters. We assume you would pay $100 per month more in utilities as a homeowner than as a renter.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">The share of the purchase price you pay upfront. Our baseline assumption is 20%. Putting less than 20% down typically requires mortgage insurance, which is not included in this calculator.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">The number of years until the mortgage is paid off. Our baseline assumption is 30 years. Some mortgages have shorter terms such as 15 years.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">The amount that your rent is likely to increase each year.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Both regular maintenance and home improvement. We assume homeowners pay 1% annually of the home's value, although this can run significantly higher.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">The opportunity cost of your money. It reflects what your money would earn as savings or investments other than housing. The higher the discount rate, the more expensive homeownership is because buying a home involves a big upfront payment.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">The amount that your home is likely to appreciate in value each year, but – be warned -- appreciation is volatile and unpredictable. We make a conservative assumption for each metro area, based on long-term and recent local trends, typically 2-3% per year. This is nominal, not real, appreciation.</span><span class="tooltip tooltipLight tooltipStemLeft" style="width: 17em;">Impacts costs such as utilities and renovations, which we assume increase at the rate of inflation.</span>
+    <div style="clear: both; display: block;"></div>
+</body>
+
+</html>

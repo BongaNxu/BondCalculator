@@ -1,0 +1,544 @@
+﻿body>div p {
+  margin: 1em auto;
+}
+
+#rent_bar {
+  background-color: rgb(2, 79, 141);
+}
+
+#buy_bar {
+  background-color: rgb(145, 201, 90);
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  font-family: "futura-pt", sans-serif;
+  font-weight: normal;
+  line-height: 1.4;
+  color: #686868;
+  background: #fefefe;
+  margin: 0px;
+}
+
+* {
+  border: 0px;
+  outline: 0px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0px;
+  padding: 0px;
+}
+
+input {
+  font-family: "futura-pt", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #014a87;
+}
+
+#rent_bar,
+#buy_bar {
+  transition: all 0.2s linear;
+  display: block;
+  float: left;
+  max-width: 198px;
+  width: 47%;
+  height: 370px;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#buy_bar {
+  margin: 0px 0px 0px 10px;
+}
+
+#chart_wrapper {
+  margin-left: 60px;
+  max-width: 100%;
+}
+
+#chart,
+#srp_buttons {
+  max-width: 410px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 370px;
+  overflow: hidden;
+  padding: 0px;
+}
+
+#chart {
+  padding: 0px 3px;
+}
+
+#srp_buttons {
+  height: auto;
+}
+
+.backgroundOMG {
+  background-color: #ff5c00;
+}
+
+section,
+.tooltipStemLeft::before {
+  display: block;
+}
+
+.form .text input,
+.table {
+  width: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+a:active,
+a:hover {
+  outline: 0px;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.form .col :last-child {
+  margin-bottom: 0px;
+}
+
+.form .col :first-child,
+.content>section {
+  margin-top: 0px;
+}
+
+.txtM {
+  vertical-align: middle;
+}
+
+.content>section {
+  margin-top: 5px;
+}
+
+.line::after,
+.box::after,
+.box .boxHead::after,
+.content>section::after {
+  clear: both;
+}
+
+th {
+  font-weight: 400;
+}
+
+fieldset {
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+input {
+  font-size: 100%;
+  vertical-align: middle;
+  margin: 0px;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"] {
+  box-sizing: border-box;
+  height: 13px;
+  width: 13px;
+  padding: 0px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+
+.main {
+  overflow: visible;
+  zoom: 1;
+}
+
+.line .lastCol {
+  display: block;
+  zoom: 1;
+  width: auto !important;
+}
+
+.line,
+.box,
+.box .boxHead,
+.content>section {
+  zoom: 1;
+}
+
+.line::before,
+.box::before,
+.box .boxHead::before,
+.content>section::before,
+.line::after,
+.box::after,
+.box .boxHead::after,
+.content>section::after {
+  content: " ";
+  display: table;
+}
+
+.hideFully {
+  visibility: hidden;
+  display: none !important;
+}
+
+.txtC {
+  text-align: center;
+}
+
+.txtL,
+table .txtL,
+table tr .txtL {
+  text-align: left;
+}
+
+.txtR {
+  text-align: right;
+}
+
+p,
+.form,
+.table {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.box {
+  margin-top: 21px;
+  margin-bottom: 21px;
+  position: relative;
+}
+
+.mtn {
+  margin-top: 0px !important;
+}
+
+.mtm {
+  margin-top: 10px !important;
+}
+
+.mtl {
+  margin-top: 21px !important;
+}
+
+.mbm {
+  margin-bottom: 10px !important;
+}
+
+.pln {
+  padding-left: 0px !important;
+}
+
+.mlm {
+  margin-left: 10px !important;
+}
+
+h2,
+.h4,
+h5 {
+  font-weight: 300;
+  font-style: normal;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin: 5px 0px;
+}
+
+.h4 {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 5px 0px;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 700;
+  margin: 5px 0px;
+}
+
+.h7 {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  margin: 5px 0px;
+}
+
+.typeReversed1 {
+  color: #fff;
+}
+
+.typeDeemphasize {
+  font-weight: 300 !important;
+}
+
+.typeEmphasize {
+  font-weight: 700 !important;
+}
+
+.cols4 {
+  width: 14.5238% !important;
+}
+
+.cols7 {
+  width: 27.0238% !important;
+}
+
+.customcol {
+  width: 43%;
+}
+
+.cols17 {
+  width: 68.6905% !important;
+}
+
+.cols24 {
+  width: 97.8571% !important;
+}
+
+.line {
+  margin-left: -21px;
+}
+
+.line .col {
+  min-height: 1px;
+  float: left;
+  zoom: 1;
+  box-sizing: border-box;
+  padding-left: 21px;
+}
+
+.line .colExt {
+  float: right;
+  zoom: 1;
+  padding: 0px 0px 0px 21px;
+}
+
+.line .lastCol {
+  float: none;
+  display: block;
+  zoom: 1;
+  width: auto !important;
+}
+
+.line .col:last-child {
+  display: table-cell;
+  float: none;
+  vertical-align: top;
+  width: 10000px !important;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.backgroundBasic {
+  background-color: #fefefe;
+}
+
+.backgroundHighlight {
+  background-color: #bbdc96;
+}
+
+.box .boxBody {
+  padding: 0px 21px;
+}
+
+.boxHighlight {
+  box-shadow: rgba(0, 0, 0, 0.0666667) 0px 0px 5px;
+}
+
+.boxBasic,
+.boxHighlight {
+  border: 1px solid #e9e9e9;
+  border-radius: 6px;
+}
+
+.boxHeadBasic {
+  border-bottom: 1px solid #e9e9e9;
+  margin: 0px 21px;
+  padding: 0px;
+}
+
+.form .fieldItem {
+  width: auto;
+  display: block;
+  zoom: 1;
+}
+
+.form .text input,
+.form .addOn {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 5px inset;
+  transition: border 0.2s;
+  padding: 0.5em;
+}
+
+.form .fieldAppend input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+}
+
+.form .fieldAppend input+.addOn {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: none;
+}
+
+.addOnBasic {
+  background: 0px center;
+  color: #222;
+  text-shadow: none;
+}
+
+.slider {
+  position: relative;
+  display: block;
+  width: 99%;
+  height: 18px;
+}
+
+.sliderLine {
+  position: absolute;
+  display: block;
+  top: 4px;
+  left: 0px;
+  right: 0px;
+  width: auto;
+  height: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  box-shadow: #e9e9e9 0px 1px 5px inset;
+}
+
+.sliderHandle {
+  position: absolute;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  z-index: 1;
+  cursor: pointer;
+  left: 0px;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+}
+
+.table thead th {
+  font-weight: 700;
+  color: #222;
+}
+
+.tableBasic th,
+.tableBasic td {
+  border: 1px solid #e9e9e9;
+}
+
+.tooltip {
+  width: auto;
+  max-width: 300px;
+  position: absolute;
+  display: none;
+  z-index: 100;
+  zoom: 1;
+  border-radius: 6px;
+  margin: 4px;
+  padding: 0.5em 1em;
+}
+
+.tooltipStemLeft::before {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  display: block;
+  content: " ";
+  overflow: hidden;
+  background-color: #fff;
+  color: #555;
+  box-shadow: #e9e9e9 1px 1px 0px 0px;
+  z-index: -1;
+}
+
+.tooltipStemLeft::before {
+  left: -6px;
+  top: 10px;
+  transform: rotate(135deg);
+}
+
+.tooltipLight {
+  box-shadow: #e9e9e9 0px 0px 1px 1px;
+  background-color: #fff;
+}
+
+.iconInfo::before,
+.iconDownOpen::before,
+.iconUpOpen::before {
+  font-style: normal;
+  display: inline-block;
+  width: 1em;
+  margin-right: 0.2em;
+}
+
+.iconInfo::before {
+  content: "\f059";
+}
+
+.iconDownOpen::before {
+  content: "\f107";
+  font-family: FontAwesome;
+}
+
+.iconUpOpen::before {
+  content: "\f106";
+  font-family: FontAwesome;
+}
+
+.content>section {
+  margin: 0px auto;
+  padding: 0;
+}
+
+.main {
+  float: none;
+  display: block;
+  width: auto;
+  zoom: 1;
+}
+
+@media screen and (max-width: 1200px) {
+  .customcol {
+    width: 100% !important;
+  }
+
+  #chart_wrapper {
+    margin: 30px 0px 0px 0px !important;
+  }
+}

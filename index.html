@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" data-whatinput="mouse" data-whatintent="mouse">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+    <title>Financial Calculators for Buying a New Home</title>
+
+    <link rel="stylesheet" href="./index_files/iqx2twd.css">
+    <link type="text/css" rel="stylesheet" href="./index_files/app.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+
+    <script src="./index_files/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+        { "@context" : "https://schema.org", "@type" : "Organization", "name" : "", "url" : "", "sameAs" : [ "", "", "" ] }
+    </script>
+
+    <!--[if IE]>
+        <link rel="stylesheet" href="/css/app.css">
+    <![endif]-->
+
+    <style>
+        h2 {
+            max-width: initial !important;
+        }
+        
+        .disable {
+            display: none !important;
+        }
+        
+        .tab-link {
+            cursor: pointer;
+            padding: 30px
+        }
+    </style>
+
+    <meta class="foundation-mq">
+</head>
+
+<body>
+    <form action="http://www.mlcalc.com/" method="post" id="mlcalcLoanForm" style="display:none">
+        <input type="hidden" name="cl" value="true">
+        <input type="hidden" name="wl" value="en">
+        <input type="hidden" name="ml" value="loan">
+        <input type="hidden" name="cl" value="true">
+        <input type="hidden" name="wg" value="widget">
+        <input type="hidden" name="la" value="">
+        <input type="hidden" name="lt" value="">
+        <input type="hidden" name="ir" value="">
+        <input type="hidden" name="sm" value="">
+        <input type="hidden" name="sy" value="">
+        <input type="hidden" name="as" value="">
+        <input type="hidden" name="cr" value="usd">
+    </form>
+    <form action="http://www.mlcalc.com/" method="post" id="mlcalcMortgageForm" style="display:none">
+        <input type="hidden" name="cl" value="true">
+        <input type="hidden" name="wl" value="en">
+        <input type="hidden" name="ml" value="mortgage">
+        <input type="hidden" name="cl" value="true">
+        <input type="hidden" name="wg" value="widget">
+        <input type="hidden" name="ma" value="">
+        <input type="hidden" name="dp" value="">
+        <input type="hidden" name="mt" value="">
+        <input type="hidden" name="ir" value="">
+        <input type="hidden" name="pt" value="">
+        <input type="hidden" name="pi" value="">
+        <input type="hidden" name="mi" value="">
+        <input type="hidden" name="sm" value="">
+        <input type="hidden" name="sy" value="">
+        <input type="hidden" name="as" value="">
+        <input type="hidden" name="mi" value="">
+        <input type="hidden" name="cr" value="usd">
+    </form>
+
+
+    <script>
+
+        function convertPaymentScheduleTableToJson() {
+
+            // prepare empty array to store objects in.
+            let paymentScheduleArray = [];
+
+            // Run through all table rows in table
+            $('#fixed-rate-table tbody tr').each( (index, item) => {
+                // Pipe all table data into unique objects per row
+                if (item.children[0]) {
+                    paymentScheduleArray.push({
+                    'payment' : item.children[0].innerText,
+                    'principal' : item.children[1].innerText,
+                    'interest' : item.children[2].innerText,
+                    'taxes' : item.children[3].innerText,
+                    'principalremaining' : item.children[4].innerText,
+                    })
+                }
+            });
+
+            return paymentScheduleArray.length > 0 ? paymentScheduleArray : ['Error converting table.'];
+        }
+
+        function genPdfFn() {
+
+            let la  = $('#loan-amount').val(),
+                lt  = $('#loan-term').val(),
+                pt  = $('#property-tax').val(),
+                pis = $('#property-insurance').val(),
+                ir  = $('#interest-rate').val(),
+                dp  = $('.down-payment .total').text().toString(),
+                pai = $('#pai').text().toString() || 'Error, change form amounts first',
+                ins = $('#ins').text().toString().replace('+', '').trim() || 'Error, change form amounts first',
+                tx  = $('#taxes').text().toString().replace('+', '').trim() || 'Error, change form amounts first',
+                mp  = $('#monthly_payment').text().toString() || 'Error, change form amounts first';  
+
+            // Ensure table is ready by the time we try to generate it
+            requestAnimationFrame( () => {
+                let data = JSON.stringify(convertPaymentScheduleTableToJson());
+                $.post('./pdfgen.php', {'tableData' : data});
+                $("#genPdf").click( () => genPdfFn() ).empty().append(`<a style="text-decoration: none;font-size:18px; display: flex;flex-flow: column;font-weight:600;align-items: flex-end;" href=./pdfgen.php?la=${la}&lt=${lt}&pt=${pt}&pi=${pis}&ir=${ir}&dp=${dp}&pai=${pai}&in=${ins}&tx=${tx}&mp=${mp}>Print pdf</a>`); 
+            });
+            return {
+                la, lt, pt, pis, ir, dp, pai, ins, tx, mp
+            }
+        }
+
+        $(document).ready( function() {
+            //genPdfFn();
+            
+            $('.data-area input').on('keydown blur', function(e) {
+                genPdfFn();
+            });
+
+            // Logic below help ensure we get the values we want to the dynamically generated elements
+            // e.g monthyl installment, taxes, etc
+            var elementsFound = false;
+
+            var tempInterval = setInterval( () => {
+                if (genPdfFn().mp || genPdfFn().ins || genPdfFn().mp) {
+                    elementsFound = true;
+                    clearInterval(tempInterval);
+                    return;
+                }
+                if (elementsFound) {
+                    return clearInterval(tempInterval);
+                } else if (!elementsFound) {
+
+                    console.log('not found!!!')
+                }
+            }, 500);
+        });
+
+    </script>
+    
+    <div class="columns" style="background-color: f4f4f4; border-bottom: 4px solid #27418a">
+        <a href="/" class="logo">
+            <div class="logo--light" style="display: block;"><img src="http://nebworksmedia.com/finance/calcfin/index_files/leogem_logo.png" alt="Leogem Properties Logo" width="201" height="115"></div>
+            <div class="logo--dark" style="display: none;"><img src="http://nebworksmedia.com/finance/calcfin/index_files/leogem_logo.png" alt="Leogem Properties Logo" width="201" height="115"></div>
+        </a>
+        <ul id="main-nav" data-responsive-menu="drilldown large-no-drilldown">
+
+        </ul>
+        <ul class="nav--icons--small">
+
+        </ul>
+    </div>
+
+    <main role="main">
+
+        <section class="tabbed-accordion calculators no-pad-top small-no-pad-bottom">
+            <div class="row full-width diff collapse">
+                <div class="small-12 columns">
+                    <div class="tabs-to-accordions">
+                        <ul class="tabs show-for-medium" data-tabs="qznsfc-tabs" id="use-module-guid">
+                           
+                            
+                            <li class="tabs-title affordability is-active" role="presentation">
+                                <a href="https://nebworksmedia.com/finance/calcv6/#affordability" role="tab" aria-controls="affordability" aria-selected="true" id="affordability-label" class="disable">
+
+                                </a>
+                                <br>
+                                <img src="./index_files/Finance Calculator Icon.svg" alt="Affordability Calculator" width="40" height="50">
+                                <br>
+                                <br>
+                                <span class="tab-link">Bond calculator</span>
+                                <br>
+                                <br>
+                            </li>
+                            <li class="tabs-title rent-vs-buy" role="presentation">
+                                <a href="https://nebworksmedia.com/finance/calcv6/#rent-vs-buy" role="tab" aria-controls="rent-vs-buy" aria-selected="false" id="rent-vs-buy-label" class="disable">
+
+                                </a>
+                                <img src="./index_files/Finance Calculator Icon.svg" alt="Rent vs Buy Calculator" width="40" height="50">
+                                <br>
+                                <br>
+                                <span class="tab-link">Rent vs buy calculator</span>
+                                <br>
+                                <br>
+                            </li>
+                        </ul>
+
+                        <ul class="responsive-tabs tabs-content" data-allow-all-closed="true" data-tabs-content="use-module-guid" role="tablist">
+                            
+                            <li class="toggleType tabs-panel is-active" id="affordability" role="tabpanel" aria-hidden="false" aria-labelledby="affordability-label">
+                                <a class="accordion-title hide-for-medium" role="tab" data-affordability-calc="1"><img src="./index_files/Finance Calculator Icon.svg" width="40" height="50"><span>Bond calculator</span></a>
+                                <div class="tab-wrap" data-tab-content="" role="tabpanel">
+                                    <aside class="affordability small-no-pad-top small-no-pad-bottom">
+                                        <div class="row align-center">
+                                            <div class="small-12 medium-10 large-8 column text-center">
+                                                <h2>Bond calculator</h2>
+                                                <div id="genPdf"></div>
+                                                <p>
+                                                Buying a home is an exciting step, and quite possibly one of the biggest investments you’ll make. That’s why it's so important to understand the factors that influence your home mortgage, such as the overall loan amount, interest rate and terms.
+                                                </p>
+                                            </div>
+                                            <div class="small-12 medium-10 large-8 column">
+                                                <div class="insertion-point"></div>
+                                                <form action="" class="data-area no-submit">
+                                                    <div class="row">
+                                                        <div class="small-12 medium-6 column">
+                                                            <p>Loan Amount</p>
+                                                            <div class="input-group">
+                                                                <span class="input-group-label">R</span>
+                                                                <input class="numbersOnly ie10hack" id="loan-amount" aria-label="Enter loan amount" type="text" name="la" data-label="Loan amoun" data-min="50000" data-max="2000000000" value="250000">
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <p>Loan Term</p>
+                                                            <div class="input-group">
+                                                                <input class="numbersOnly ie10hack" id="loan-term" aria-label="Enter loan term in years" type="text" name="lt" value="20">
+                                                                <span class="input-group-label">years</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <div class="affordability-calc-old">
+                                                                <p>Property Tax</p>
+                                                                <div class="input-group">
+                                                                    <input disabled="true" class="numbersOnly ie10hack-2" id="property-tax" aria-label="Enter property tax per year" value="3000" type="text">
+                                                                    <span class="input-group-label">R/Month</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <div class="affordability-calc-old disable">
+                                                                <p>Property Insurance</p>
+                                                                <div class="input-group">
+                                                                    <input class="numbersOnly ie10hack-3" id="property-insurance" aria-label="Enter property insurance per year" value="0" type="text">
+                                                                    <span class="input-group-label">R/year</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- New Entrants -->
+                                                        <div class="small-12 medium-6 column">
+                                                            <div class="affordability-calc-old">
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <div class="affordability-calc-old">
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- ./ New Entrants -->
+                                                        <div class="small-12 medium-6 column">
+                                                            <p>Interest Rate</p>
+                                                            <div class="input-group">
+                                                                <input class="numbersOnly ie10hack" id="interest-rate" aria-label="Enter interest rate" type="text" name="ir" value="10.25" data-label="Interest Rate % " data-min="0" data-max="100">
+                                                                <span class="input-group-label">%</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <p>Show Amortization Schedule By</p>
+                                                            <div class="row collapse" role="radiogroup" aria-label="show amortization schedule by year or month">
+                                                                <div class="column medium-6">
+                                                                    <div class="colored-checkbox inline">
+                                                                        <span>Year</span>
+                                                                        <input type="radio" id="year" value="year" name="show-by" data-label="Year" aria-label="Check to show the amortization schedule by year">
+                                                                        
+                                                                        <label for="year"><span class="show-for-sr">Check to show the amortization schedule by year</span></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="column medium-6">
+                                                                    <div class="colored-checkbox inline">
+                                                                        <span>Month</span>
+                                                                        <input type="radio" id="month" value="month" name="show-by" data-label="Month" checked="checked" aria-label="Check to show the amortization schedule by month">
+                                                                        
+                                                                        <label for="month"><span class="show-for-sr">Check to show the amortization schedule by month</span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <p>First Payment Date</p>
+                                                            <div class="row collapse">
+                                                                <div class="column small-12 medium-8 payment-month">
+                                                                    <select id="payment-month" aria-label="Choose your first payment month">
+                                                                        <option value="1" selected="">January</option>
+                                                                        <option value="2">February</option>
+                                                                        <option value="3">March</option>
+                                                                        <option value="4">April</option>
+                                                                        <option value="5">May</option>
+                                                                        <option value="6">June</option>
+                                                                        <option value="7">July</option>
+                                                                        <option value="8">August</option>
+                                                                        <option value="9">September</option>
+                                                                        <option value="10">October</option>
+                                                                        <option value="11">November</option>
+                                                                        <option value="12">December</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="column small-12 medium-4">
+                                                                    <select id="payment-year" aria-label="Choose your first payment year">
+                                                                        <option value="2019">2019</option>
+                                                                        <option value="2020">2020</option>
+                                                                        <option value="2021">2021</option>
+                                                                        <option value="2022">2022</option>
+                                                                        <option value="2023">2023</option>
+                                                                        <option value="2024">2024</option>
+                                                                        <option value="2025">2025</option>
+                                                                        <option value="2026">2026</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="small-12 medium-6 column">
+                                                            <div class="affordability-calc-old down-payment">
+                                                                <p>Deposit: <span class="total">R0.00</span></p>
+                                                                <div class="input-group">
+                                                                    <input class="numbersOnly" id="down-payment" aria-label="Enter your downpayment percentage" type="text" name="dp" value="0" data-label="Down Payment %" data-min="0" data-max="100">
+                                                                    <span class="input-group-label">%</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="submit" class="show-for-sr" value="update calculator" aria-label="submit button for updating the calculator">
+                                                </form>
+                                                <div id="fixed-rate-results">
+                                                    
+                                                    <div class="monthly-totals">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>R1,419.47</td>
+                                                                    <td class="totals">Monthly Payment</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <canvas id="fixed-rate-chart" width="1010" height="440" style="margin-bottom: 15px; display: block; width: 1010px; height: 440px;"></canvas>
+                                                    <div class="table-toggle"><a class="button button--blue--solid" onclick="toggleContent();">View payment schedule <i aria-hidden="true" class="fa fa-chevron-down"></i></a></div>
+                                                    <div class="table-area hidden">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </li>
+                            <li class="toggleType tabs-panel" id="rent-vs-buy" role="tabpanel" aria-hidden="true" aria-labelledby="rent-vs-buy-label">
+                                <a class="accordion-title hide-for-medium" role="tab"><img src="./index_files/Finance Calculator Icon.svg" width="40" height="50"><span>Rent vs buy calculator</span></a>
+                                <div class="tab-wrap" data-tab-content="" role="tabpanel">
+                                    <aside class="rent-vs-buy small-no-pad-top small-no-pad-bottom">
+                                        <div class="row align-center">
+                                            <div class="small-12 medium-10 large-8 column text-center">
+                                                <h2>Rent vs. buy calculator</h2>
+                                                <p>Should you keep renting or make the move to homeownership? This calculator helps you weigh the fees, taxes, and monthly payments to help you determine the best next step for you. Use the slider buttons to adjust numbers, and the chart below will show you different scenarios to consider.*</p>
+<p>*While this calculation is based on the original purchase price, fees, and taxes payable at that time, remember that insurance and tax costs can fluctuate from year to year.</p>
+                                            </div>
+                                            <div class="small-12 medium-10 large-8 column text-center">
+                                                <iframe id="rentVsBuyFrame" src="./index_files/rent-vs-buy-calculator-frame.html" name="Rent vs Buy Calculator" title="Rent vs Buy Calculator" aria-label="Rent vs Buy Calculator" scrolling="no" style="overflow: hidden; height: 0px;" data-gtm-yt-inspected-2703902_325="true"></iframe> 
+                                            </div>
+                                        </div>
+                                    </aside>
+                                    <script>
+                                        $(document).ready(function() {
+                                            iFrameResize({
+                                                log: false,
+                                                heightCalculationMethod: 'max'
+                                            });
+                                        });
+                                    </script>
+                                    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <header class="row align-center">
+                <div class="small-12 medium-9 large-8 columns text-center">
+                    <p class="disclaimer">
+                        This calculator is provided solely for general information purposes. Although this calculator may be a useful tool in evaluating certain financial information and assumptions provided by the user, it is not intended in any way as financial, securities, insurance, tax, or legal advice or services. Further, this calculator may not include all financial information relevant to any particular user, and there often are other important considerations to any home buying decision that are difficult to quantify in financial terms. Accordingly, this calculator is provided on an "AS IS" AND "AS AVAILABLE" BASIS WITHOUT REPRESENTATIONS OR WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF SUITABILITY, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. Leogem Properties does not assume any duty by making this calculator available, all of which duties are expressly disclaimed, and Leogem Properties shall not be responsible for any errors or omissions in this calculator or the consequences of any decisions or actions taken in reliance upon this calculator.
+                        <br>
+                        <br>
+                        The foregoing information is provided solely for general information purposes and is not intended in any way as financial, securities, insurance, tax, or legal advice or services. Each potential homebuyer may have unique financial and other considerations that may be important to any home buying, financing or related decision. Accordingly, Leogem Properties does not assume any duty or liability in providing the foregoing information and expressly disclaims all representations and warranties of any kind, either express or implied, with respect to such information. Potential homebuyers that desire additional information or guidance tailored to their specific situation should contact a relevant professional.<br><br><br>
+                    </p>
+                </div>
+            </header>
+        </section>
+        
+
+    </main>
+    <script src="./index_files/fixedrate.min.js"></script>
+    <script type="text/javascript" src="./index_files/jQueryMobileSwipe.min.js"></script>
+    <script type="text/javascript" src="./index_files/carouselOnDemand.min.js"></script>
+    <script type="text/javascript" src="./index_files/vendor.js"></script>
+    <script type="text/javascript" src="./index_files/custom-042319.js"></script>
+</body>
+</html>
